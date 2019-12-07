@@ -10,18 +10,16 @@ env:
   global:
     - TARGET=armv7-unknown-linux-musleabihf
     - CARGO_TARGET_ARMV7_UNKNOWN_LINUX_MUSLEABIHF_LINKER=arm-linux-gcc
-    - TOOLCHAIN_URL="https://toolchains.bootlin.com/downloads/releases/toolchains/armv7-eabihf/tarballs/armv7-eabihf--musl--stable-2018.11-1.tar.bz2"
-    - TOOLCHAIN="armv7-eabihf--musl--stable-2018.02-2"
+    - TOOLCHAIN=armv7-eabihf--musl--stable-2018.11-1
+    - TOOLCHAIN_URL="https://toolchains.bootlin.com/downloads/releases/toolchains/armv7-eabihf/tarballs/"
     - CC_armv7_unknown_linux_musleabihf=arm-linux-gcc
     - CXX_armv7_unknown_linux_musleabihf=arm-linux-g++
     - LD_armv7_unknown_linux_musleabihf=arm-linux-ld
 
 before_script:
-  - pwd
-  - curl -o- ${TOOLCHAIN_URL} | tar -xjf -
-  - ls
+  - curl -o- ${TOOLCHAIN_URL}/${TOOLCHAIN}.tar.bz2 | tar -xjf -
   - rustup target add $TARGET
 
 script:
-  - ls ${HOME}/${TOOLCHAIN}/bin
-  - PATH="${PATH}:${HOME}/${TOOLCHAIN}/bin" RUSTFLAGS="-C link-arg=-s" cargo build --release --target $TARGET --locked
+  - ls ${TRAVIS_BUILD_DIR}/${TOOLCHAIN}/bin
+  - PATH="${PATH}:${TRAVIS_BUILD_DIR}/${TOOLCHAIN}/bin" RUSTFLAGS="-C link-arg=-s" cargo build --release --target $TARGET --locked
