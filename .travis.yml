@@ -7,13 +7,14 @@ addons:
       - musl-tools
 
 env:
-  - TARGET=armv7-unknown-linux-musleabihf
-  - CARGO_TARGET_ARMV7_UNKNOWN_LINUX_MUSLEABIHF_LINKER=arm-linux-gcc
-  - TOOLCHAIN_URL="https://toolchains.bootlin.com/downloads/releases/toolchains/armv7-eabihf/tarballs/armv7-eabihf--musl--stable-2018.11-1.tar.bz2"
-  - TOOLCHAIN="armv7-eabihf--musl--stable-2018.02-2"
-  - CC_armv7_unknown_linux_musleabihf=arm-linux-gcc
-  - CXX_armv7_unknown_linux_musleabihf=arm-linux-g++
-  - LD_armv7_unknown_linux_musleabihf=arm-linux-ld
+  global:
+    - TARGET=armv7-unknown-linux-musleabihf
+    - CARGO_TARGET_ARMV7_UNKNOWN_LINUX_MUSLEABIHF_LINKER=arm-linux-gcc
+    - TOOLCHAIN_URL="https://toolchains.bootlin.com/downloads/releases/toolchains/armv7-eabihf/tarballs/armv7-eabihf--musl--stable-2018.11-1.tar.bz2"
+    - TOOLCHAIN="armv7-eabihf--musl--stable-2018.02-2"
+    - CC_armv7_unknown_linux_musleabihf=arm-linux-gcc
+    - CXX_armv7_unknown_linux_musleabihf=arm-linux-g++
+    - LD_armv7_unknown_linux_musleabihf=arm-linux-ld
 
 before_script:
   - curl -o- ${TC_ARM7_URL} | tar -xjf -
