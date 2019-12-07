@@ -17,8 +17,8 @@ env:
     - LD_armv7_unknown_linux_musleabihf=arm-linux-ld
 
 before_script:
-  - curl -o- ${TC_ARM7_URL} | tar -xjf -
+  - curl -o- ${TOOLCHAIN_URL} | tar -xjf -
   - rustup target add $TARGET
 
 script:
-  - PATH="${PATH}:${TOOLCHAIN_ARM7}/bin" RUSTFLAGS="-C link-arg=-s" cargo build --release --target $TARGET --locked
+  - PATH="${PATH}:${TOOLCHAIN}/bin" RUSTFLAGS="-C link-arg=-s" cargo build --release --target $TARGET --locked
