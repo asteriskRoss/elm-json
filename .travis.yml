@@ -21,4 +21,5 @@ before_script:
   - rustup target add $TARGET
 
 script:
-  - PATH="${PATH}:${TOOLCHAIN}/bin" RUSTFLAGS="-C link-arg=-s" cargo build --release --target $TARGET --locked
+  - ls ${TRAVIS_BUILD_DIR}/${TOOLCHAIN}/bin
+  - PATH="${PATH}:${TRAVIS_BUILD_DIR}/${TOOLCHAIN}/bin" RUSTFLAGS="-C link-arg=-s" cargo build --release --target $TARGET --locked
